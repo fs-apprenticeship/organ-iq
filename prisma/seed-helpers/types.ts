@@ -7,4 +7,10 @@ export type AccountSeed = {
 export type Fixture = {
   accounts?: readonly AccountSeed[];
   afterSeed?: (prisma: PrismaClient) => Promise<void>;
+  users?: readonly UserSeed[];
+};
+
+export type UserSeed = {
+  email: string;
+  name: string;
 };
