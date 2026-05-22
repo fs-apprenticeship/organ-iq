@@ -7,20 +7,24 @@ export default async function* generateTextStream({
   instructions: string;
   prompt: string;
 }) {
-  const client = new OpenAI();
-  const stream = client.responses.stream({
-    input: [
-      { content: instructions, role: "developer" },
-      { content: prompt, role: "user" },
-    ],
-    model: "gpt-4o-2024-08-06",
+  const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
   });
 
-  for await (const event of stream) {
-    if (event.type !== "response.output_text.delta") {
-      continue;
-    }
+  const stream = await openai.chat.completions.create({
+    messages: [
+      { content: instructions, role: "system" },
+      { content: prompt, role: "user" },
+    ],
+    model: "gpt-4o-mini", // Use gpt-4o-mini for faster/cheaper testing
+    stream: true,
+    temperature: 0.7,
+  });
 
-    yield event.delta;
+  for await (const chunk of stream) {
+    const content = chunk.choices[0]?.delta?.content || "";
+    if (content) {
+      yield content;
+    }
   }
 }
