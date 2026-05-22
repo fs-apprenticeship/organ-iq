@@ -1,4 +1,5 @@
-import { type PrismaClient } from "@/generated/prisma/client";
+// prisma/seed-helpers/types.ts
+import { PrismaClient } from "@/generated/prisma/client";
 
 export type AccountSeed = {
   clerkUserId: string;
@@ -10,7 +11,7 @@ export type Fixture = {
   users?: readonly UserSeed[];
 };
 
-export type UserSeed = {
+type UserSeed = {
   email: string;
   name: string;
 };
