@@ -14,7 +14,7 @@ export default function QuestionCard({
 }: QuestionCardProps) {
   return (
     <div
-      className="flex flex-col gap 6 border-grey-700 rounded-xl bg-[#111827]"
+      className="flex flex-col gap-6 border-gray-700 rounded-xl bg-[#111827]"
       style={{ fontFamily: "'Courier New', Courier, monospace" }}
     >
       <span className="text-xs uppercase text-green-400">
