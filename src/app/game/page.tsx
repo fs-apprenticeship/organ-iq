@@ -6,7 +6,7 @@ import QuestionCard from "@/app/components/question-card";
 import { DUMMY_QUESTIONS } from "@/app/hooks/dummy-data";
 
 export default function GamePage() {
-  const [selectedFormula, setSelectedFormuala] = useState<null | string>(null);
+  const [selectedFormula, setSelectedFormula] = useState<null | string>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   function handleSelect(formula: string) {
@@ -16,7 +16,7 @@ export default function GamePage() {
     const choice = question.choices.find((c) => c.formula === formula);
     const correct = choice?.correct === true;
 
-    setSelectedFormuala(formula);
+    setSelectedFormula(formula);
     setIsCorrect(correct);
     console.log("Player selected:", formula, "| Correct:", correct); // just log it for now
   }
