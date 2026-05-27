@@ -12,17 +12,3 @@ type Choice = {
   correct: boolean;
   formula: string;
 };
-
-//  type GameStatus =
-//   | "answered"
-//   | "complete"
-//   | "error"
-//   | "loading"
-//   | "playing";
-
-// type PlayAnswer = {
-//   answer_at: number;
-//   correct: boolean;
-//   question_id: number;
-//   selected_formula: string;
-// };
