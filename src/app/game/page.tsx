@@ -22,14 +22,17 @@ export default function GamePage() {
 
   return (
     <div className="min-h-screen bg-[#0d1117] flex flex-col items-center">
+      {/* Turn Bar */}
       <div className="w-full">
         <TurnBar />
       </div>
 
+      {/* Score Board */}
       <div className="w-full max-w-xs mt-8 px-4">
         <ScoreBoard />
       </div>
 
+      {/* Question Card */}
       <div className="w-full mt-12 px-8 flex gap-6 justify-center">
         <div className="w-full max-w-xl flex flex-col gap-2 rounded-xl border border-gray-700 bg-[#111827]">
           <QuestionCard
@@ -52,6 +55,7 @@ export default function GamePage() {
                 {isCorrect ? "Correct" : "Wrong"}
               </div>
 
+              {/* Next Question Button */}
               <button
                 className={`px-4 py-3 rounded-lg border mt-2 text-sm ${
                   isCorrect

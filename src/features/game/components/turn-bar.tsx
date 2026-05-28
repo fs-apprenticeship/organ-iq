@@ -12,8 +12,9 @@ export default function TurnBar() {
   );
 }
 
-// ─── Cell data ─────────────────────────────────────────────────────────────
-
+{
+  /* Cell data */
+}
 const CELLS = [
   { label: "Whose Turn", value: "Computer" },
   { label: "Turn", value: "5" },
@@ -21,8 +22,9 @@ const CELLS = [
   { label: "Time", value: "18 Seconds" },
 ];
 
-// ─── Sub-component ─────────────────────────────────────────────────────────
-
+{
+  /* Sub-component */
+}
 function Cell({
   children,
   label,
