@@ -60,7 +60,7 @@ export default function GamePage() {
                 }`}
               >
                 You got the last question {isCorrect ? "Correct" : "Wrong"}!
-                Press for Next Question
+                Ready for Next Question
               </button>
             </>
           )}
