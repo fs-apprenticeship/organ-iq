@@ -14,7 +14,7 @@
     "format": "prettier . --write",
     "knip": "knip --production",
     "lint": "eslint",
-    "prepare": "husky",
+    "prepare": "husky || true",
     "start": "next start",
     "test": "NODE_ENV=test prisma migrate status && prisma generate && vitest --coverage"
   },
