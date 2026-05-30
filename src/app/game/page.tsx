@@ -1,9 +1,6 @@
 "use client";
 
-//import { useState } from "react";
-
 import QuestionCard from "@/app/components/question-card";
-//import { DUMMY_QUESTIONS } from "@/app/hooks/dummy-data";
 import ScoreBoard from "@/features/game/components/score-board";
 import TurnBar from "@/features/game/components/turn-bar";
 import { useQuestions } from "../hooks/get-questions";
@@ -16,6 +13,7 @@ export default function GamePage() {
     currentQuestion,
     isCorrect,
     nextQuestion,
+    score,
     selectAnswer,
     selectedFormula,
     //totalQuestions,
@@ -30,7 +28,7 @@ export default function GamePage() {
 
       {/* Score Board */}
       <div className="w-full max-w-xs mt-8 px-4">
-        <ScoreBoard />
+        <ScoreBoard score={score} />
       </div>
 
       {/* Question Card */}

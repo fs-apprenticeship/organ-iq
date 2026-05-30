@@ -6,6 +6,7 @@ export function useQuestions() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedFormula, setSelectedFormula] = useState<null | string>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     fetchQuestions().then(setQuestions);
@@ -20,8 +21,10 @@ export function useQuestions() {
     const choice = questions[currentIndex].choices.find(
       (c) => c.formula === formula,
     );
+    const correct = choice?.correct === true;
     setSelectedFormula(formula);
     setIsCorrect(choice?.correct === true);
+    if (correct) setScore((s) => s + 1);
   }
 
   function nextQuestion() {
@@ -38,6 +41,7 @@ export function useQuestions() {
     selectAnswer,
     selectedFormula,
     totalQuestions: questions.length,
+    score,
   };
 }
 
