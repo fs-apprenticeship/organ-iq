@@ -1,24 +1,25 @@
 "use client";
 
-import { useState } from "react";
+//import { useState } from "react";
 
 import QuestionCard from "@/app/components/question-card";
-import { DUMMY_QUESTIONS } from "@/app/hooks/dummy-data";
+//import { DUMMY_QUESTIONS } from "@/app/hooks/dummy-data";
 import ScoreBoard from "@/features/game/components/score-board";
 import TurnBar from "@/features/game/components/turn-bar";
+import { useQuestions } from "../hooks/get-questions";
 
 export default function GamePage() {
-  const [selectedFormula, setSelectedFormula] = useState<null | string>(null);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-
-  function handleSelect(formula: string) {
-    if (selectedFormula != null) return;
-    const question = DUMMY_QUESTIONS[0];
-    const choice = question.choices.find((c) => c.formula === formula);
-    const correct = choice?.correct === true;
-    setSelectedFormula(formula);
-    setIsCorrect(correct);
-  }
+  //const [selectedFormula, setSelectedFormula] = useState<null | string>(null);
+  //const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const {
+    //currentIndex,
+    currentQuestion,
+    isCorrect,
+    //nextQuestion,
+    selectAnswer,
+    selectedFormula,
+    //totalQuestions,
+  } = useQuestions();
 
   return (
     <div className="min-h-screen bg-[#0d1117] flex flex-col items-center">
@@ -35,13 +36,16 @@ export default function GamePage() {
       {/* Question Card */}
       <div className="w-full mt-12 px-8 flex gap-6 justify-center">
         <div className="w-full max-w-xl flex flex-col gap-2 rounded-xl border border-gray-700 bg-[#111827]">
-          <QuestionCard
-            isCorrect={isCorrect}
-            onSelect={handleSelect}
-            question={DUMMY_QUESTIONS[0]}
-            selectedFormula={selectedFormula}
-          />
-
+          {currentQuestion === null ? (
+            <p className="text-gray-500 text-sm p-6">Loading...</p>
+          ) : (
+            <QuestionCard
+              question={currentQuestion}
+              selectedFormula={selectedFormula}
+              isCorrect={isCorrect}
+              onSelect={selectAnswer}
+            />
+          )}
           {selectedFormula !== null && (
             <>
               <div

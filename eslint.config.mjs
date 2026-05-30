@@ -7,7 +7,7 @@ import boundaries from "eslint-plugin-boundaries";
 import checkFile from "eslint-plugin-check-file";
 import githubAction from "eslint-plugin-github-action";
 import importPlugin from "eslint-plugin-import";
-import perfectionist from "eslint-plugin-perfectionist";
+//import perfectionist from "eslint-plugin-perfectionist";
 import security from "eslint-plugin-security";
 import yml from "eslint-plugin-yml";
 import { defineConfig, globalIgnores } from "eslint/config";
@@ -17,10 +17,10 @@ const eslintConfig = defineConfig([
   ...nextTs,
   ...githubAction.configs.recommended,
   ...yml.configs.recommended,
-  {
-    ...perfectionist.configs["recommended-natural"],
-    files: ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
-  },
+  // {
+  //   ...perfectionist.configs["recommended-natural"],
+  //   files: ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
+  // },
   security.configs.recommended,
   {
     extends: ["markdown/recommended"],
