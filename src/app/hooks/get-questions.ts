@@ -9,7 +9,9 @@ export function useQuestions() {
   const [score, setScore] = useState(0);
 
   useEffect(() => {
-    fetchQuestions().then(setQuestions);
+    fetchQuestions()
+      .then(setQuestions)
+      .catch(() => console.error("failed to load questions"));
   }, []);
 
   function selectAnswer(formula: string) {
@@ -17,10 +19,8 @@ export function useQuestions() {
     // eslint-disable-next-line security/detect-object-injection
     const question = questions[currentIndex];
     if (!question) return;
-    // eslint-disable-next-line security/detect-object-injection
-    const choice = questions[currentIndex].choices.find(
-      (c) => c.formula === formula,
-    );
+
+    const choice = question.choices.find((c) => c.formula === formula);
     const correct = choice?.correct === true;
     setSelectedFormula(formula);
     setIsCorrect(choice?.correct === true);
@@ -49,5 +49,4 @@ async function fetchQuestions(): Promise<Question[]> {
   const res = await fetch("/api/questions");
   const json = await res.json();
   return json;
-  console.log(json.data);
 }

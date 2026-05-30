@@ -6,18 +6,17 @@ import TurnBar from "@/features/game/components/turn-bar";
 import { useQuestions } from "../hooks/get-questions";
 
 export default function GamePage() {
-  //const [selectedFormula, setSelectedFormula] = useState<null | string>(null);
-  //const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const {
-    //currentIndex,
+    currentIndex,
     currentQuestion,
     isCorrect,
     nextQuestion,
     score,
     selectAnswer,
     selectedFormula,
-    //totalQuestions,
+    totalQuestions,
   } = useQuestions();
+  const isGameComplete = currentIndex >= totalQuestions && totalQuestions > 0;
 
   return (
     <div className="min-h-screen bg-[#0d1117] flex flex-col items-center">
@@ -34,7 +33,16 @@ export default function GamePage() {
       {/* Question Card */}
       <div className="w-full mt-12 px-8 flex gap-6 justify-center">
         <div className="w-full max-w-xl flex flex-col gap-2 rounded-xl border border-gray-700 bg-[#111827]">
-          {currentQuestion === null ? (
+          {isGameComplete ? (
+            <div className="flex flex-col items-center justify-center p-12 gap-4">
+              <h2 className="text-2xl font-bold tracking-widest uppercase text-green-400">
+                Great Job!
+              </h2>
+              <p className="text-gray-400 text-sm">
+                You scored {score} out of {totalQuestions}
+              </p>
+            </div>
+          ) : currentQuestion === null ? (
             <p className="text-gray-500 text-sm p-6">Loading...</p>
           ) : (
             <QuestionCard
@@ -66,7 +74,6 @@ export default function GamePage() {
                     : "border-red-700 bg-red-950 text-red-400"
                 }`}
               >
-                You got the last question {isCorrect ? "Correct" : "Wrong"}!
                 Ready for Next Question
               </button>
             </>
