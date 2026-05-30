@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Question } from "./types";
+import { Question } from "../types";
 
 export function useQuestions() {
   const [questions, setQuestions] = useState<Question[]>([]);

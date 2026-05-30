@@ -1,9 +1,9 @@
 "use client";
 
-import QuestionCard from "@/app/components/question-card";
+import QuestionCard from "@/features/game/components/question-card";
 import ScoreBoard from "@/features/game/components/score-board";
 import TurnBar from "@/features/game/components/turn-bar";
-import { useQuestions } from "../hooks/get-questions";
+import { useQuestions } from "../../features/game/hooks /use-questions";
 
 export default function GamePage() {
   const {
