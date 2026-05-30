@@ -15,7 +15,7 @@ export default function GamePage() {
     //currentIndex,
     currentQuestion,
     isCorrect,
-    //nextQuestion,
+    nextQuestion,
     selectAnswer,
     selectedFormula,
     //totalQuestions,
@@ -61,6 +61,7 @@ export default function GamePage() {
 
               {/* Next Question Button */}
               <button
+                onClick={nextQuestion}
                 className={`px-4 py-3 rounded-lg border mt-2 text-sm ${
                   isCorrect
                     ? "border-green-700 bg-green-950 text-green-400"

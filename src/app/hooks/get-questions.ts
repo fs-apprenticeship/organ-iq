@@ -14,6 +14,9 @@ export function useQuestions() {
   function selectAnswer(formula: string) {
     if (selectedFormula !== null) return;
     // eslint-disable-next-line security/detect-object-injection
+    const question = questions[currentIndex];
+    if (!question) return;
+    // eslint-disable-next-line security/detect-object-injection
     const choice = questions[currentIndex].choices.find(
       (c) => c.formula === formula,
     );
@@ -41,6 +44,6 @@ export function useQuestions() {
 async function fetchQuestions(): Promise<Question[]> {
   const res = await fetch("/api/questions");
   const json = await res.json();
-  return json.data;
+  return json;
   console.log(json.data);
 }
