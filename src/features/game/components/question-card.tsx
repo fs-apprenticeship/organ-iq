@@ -1,4 +1,4 @@
-import { Question } from "../hooks/types";
+import { Question } from "../types";
 
 interface QuestionCardProps {
   isCorrect: boolean | null;
