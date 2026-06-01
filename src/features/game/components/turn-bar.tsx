@@ -1,4 +1,23 @@
-export default function TurnBar() {
+type TurnBarProps = {
+  score: number;
+  streak: number;
+  time: number;
+  playerName?: string;
+};
+
+export default function TurnBar({
+  score,
+  streak,
+  time,
+  playerName = "Player",
+}: TurnBarProps) {
+  const CELLS = [
+    { label: "Player", value: playerName },
+    { label: "Score", value: `${score} pts` },
+    { label: "Streak", value: streak > 0 ? `🔥 ${streak}` : streak },
+    { label: "Time", value: `${time}s` },
+  ];
+
   return (
     <div className="bg-[#0d1117] px-8 pt-12 pb-3">
       <div className="grid grid-cols-4 gap-2 w-full max-w-xl mx-auto rounded-xl border border-gray-700 p-3">
@@ -12,19 +31,6 @@ export default function TurnBar() {
   );
 }
 
-{
-  /* Cell data */
-}
-const CELLS = [
-  { label: "Whose Turn", value: "Computer" },
-  { label: "Turn", value: "5" },
-  { label: "Phase", value: "Play" },
-  { label: "Time", value: "18 Seconds" },
-];
-
-{
-  /* Sub-component */
-}
 function Cell({
   children,
   label,
