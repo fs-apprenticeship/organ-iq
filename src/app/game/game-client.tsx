@@ -78,20 +78,9 @@ export default function GameClient({ playerName }: { playerName: string }) {
 
           {selectedFormula !== null && !isGameComplete && (
             <>
-              <div
-                className={`px-4 py-3 rounded-lg border text-sm ${
-                  isCorrect
-                    ? "border-green-700 bg-green-950 text-green-400"
-                    : "border-red-700 bg-red-950 text-red-400"
-                }`}
-                style={{ fontFamily: "'Courier New', Courier, monospace" }}
-              >
-                {isCorrect ? "Correct" : "Wrong"}
-              </div>
-
               <button
                 onClick={handleNext}
-                className={`px-4 py-3 rounded-lg border mt-2 text-sm ${
+                className={`px-4 py-3 max rounded-lg border text-sm ${
                   isCorrect
                     ? "border-green-700 bg-green-950 text-green-400"
                     : "border-red-700 bg-red-950 text-red-400"
@@ -105,7 +94,7 @@ export default function GameClient({ playerName }: { playerName: string }) {
 
         <AITutor
           systemPrompt="You are an expert AI Tutor for Organ IQ. Help users understand biology, anatomy, and medical concepts clearly. Be concise and encouraging."
-          height="620px"
+          height="350px"
         />
       </div>
     </div>
