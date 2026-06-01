@@ -46,7 +46,7 @@ export function useQuestions() {
 }
 
 async function fetchQuestions(): Promise<Question[]> {
-  const res = await fetch("/api/questions");
+  const res = await fetch("https://organiqapi.shujaatazim.com/reactions");
   const json = await res.json();
-  return json;
+  return json.data;
 }
