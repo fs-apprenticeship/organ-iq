@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { Geist, Geist_Mono } from "next/font/google";
+import { UserButton } from "@clerk/nextjs";
 
 import AppProvider from "@/app/provider";
 
@@ -34,7 +35,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground`}
       >
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+          <div className="fixed top-4 right-12 z-50">
+            <UserButton />
+          </div>
+          {children}
+        </AppProvider>
       </body>
     </html>
   );

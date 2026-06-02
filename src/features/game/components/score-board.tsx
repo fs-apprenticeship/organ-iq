@@ -1,15 +1,15 @@
-export default function ScoreBoard({ score }: { score: number }) {
-  const scores = [
-    {
-      key: "Your Score",
-      label: " ",
-      leading: true,
-      name: "Your score",
-      score: score,
-    },
-    { key: "Ai", label: " ", leading: true, name: "Opponent", score: 0 },
-  ];
-  const tied = scores[0].score === scores[1].score;
+export default function ScoreBoard({
+  score,
+  wrongCount,
+  hasAnswered,
+  isCorrect,
+}: {
+  score: number;
+  wrongCount: number;
+  hasAnswered: boolean;
+  isCorrect: boolean | null;
+}) {
+  const tied = score === wrongCount;
 
   return (
     <div
@@ -21,7 +21,7 @@ export default function ScoreBoard({ score }: { score: number }) {
         <span className="text-[10px] uppercase tracking-widest text-green-400">
           Score
         </span>
-        {tied && (
+        {hasAnswered && tied && (
           <span className="rounded-full border border-gray-600 px-2 py-0.5 text-[9px] uppercase tracking-wide text-gray-400">
             Tied
           </span>
@@ -30,40 +30,71 @@ export default function ScoreBoard({ score }: { score: number }) {
 
       {/* Score rows */}
       <div className="flex flex-col gap-2">
-        {scores.map(({ key, label, leading, name, score }) => (
-          <div
-            className={`flex items-center justify-between rounded-lg border px-3 py-2 transition-all duration-200 ${
-              leading
-                ? "border-green-700 bg-green-950"
-                : "border-gray-700 bg-[#0d1117]"
-            }`}
-            key={key}
-          >
-            {/* Name + equation */}
-            <div className="flex flex-col gap-0.5">
-              <div className="flex items-center gap-1.5">
-                {leading && <span className="text-[10px]">👑</span>}
-                <span
-                  className={`text-[11px] font-semibold ${
-                    leading ? "text-green-400" : "text-gray-500"
-                  }`}
-                >
-                  {name}
-                </span>
-              </div>
-              <span className="text-[10px] text-gray-500">{label}</span>
-            </div>
-
-            {/* Total */}
+        {/* Correct Row */}
+        <div
+          className={`flex items-center justify-between rounded-lg border px-3 py-2 transition-all duration-200 ${
+            hasAnswered && isCorrect === true
+              ? "border-green-700 bg-green-950"
+              : "border-gray-700 bg-[#0d1117]"
+          }`}
+        >
+          <div className="flex items-center gap-1.5">
+            {hasAnswered && isCorrect === true && (
+              <span className="text-[10px]">👑</span>
+            )}
             <span
-              className={`text-2xl font-bold tabular-nums ${
-                leading ? "text-green-400" : "text-gray-600"
+              className={`text-[11px] font-semibold ${
+                hasAnswered && isCorrect === true
+                  ? "text-green-400"
+                  : "text-gray-500"
               }`}
             >
-              {score}
+              Correct
             </span>
           </div>
-        ))}
+          <span
+            className={`text-2xl font-bold tabular-nums ${
+              hasAnswered && isCorrect === true
+                ? "text-green-400"
+                : "text-gray-600"
+            }`}
+          >
+            {score}
+          </span>
+        </div>
+
+        {/* Wrong Row */}
+        <div
+          className={`flex items-center justify-between rounded-lg border px-3 py-2 transition-all duration-200 ${
+            hasAnswered && isCorrect === false
+              ? "border-red-700 bg-red-950"
+              : "border-gray-700 bg-[#0d1117]"
+          }`}
+        >
+          <div className="flex items-center gap-1.5">
+            {hasAnswered && isCorrect === false && (
+              <span className="text-[10px]">💀</span>
+            )}
+            <span
+              className={`text-[11px] font-semibold ${
+                hasAnswered && isCorrect === false
+                  ? "text-red-400"
+                  : "text-gray-500"
+              }`}
+            >
+              Wrong
+            </span>
+          </div>
+          <span
+            className={`text-2xl font-bold tabular-nums ${
+              hasAnswered && isCorrect === false
+                ? "text-red-400"
+                : "text-gray-600"
+            }`}
+          >
+            {wrongCount}
+          </span>
+        </div>
       </div>
     </div>
   );

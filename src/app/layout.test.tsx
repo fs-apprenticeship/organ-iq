@@ -16,6 +16,11 @@ vi.mock("@/app/provider", () => ({
   default: appProviderMock,
 }));
 
+vi.mock("@clerk/nextjs", () => ({
+  // ← add this
+  UserButton: () => <div data-testid="user-button" />,
+}));
+
 import RootLayout from "./layout";
 
 describe("RootLayout", () => {

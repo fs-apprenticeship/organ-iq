@@ -6,7 +6,10 @@ export function useQuestions() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedFormula, setSelectedFormula] = useState<null | string>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [wrongCount, setWrongCount] = useState(0);
   const [score, setScore] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [hasAnswered, setHasAnswered] = useState(false);
 
   useEffect(() => {
     fetchQuestions()
@@ -16,15 +19,22 @@ export function useQuestions() {
 
   function selectAnswer(formula: string) {
     if (selectedFormula !== null) return;
-    // eslint-disable-next-line security/detect-object-injection
-    const question = questions[currentIndex];
+    const question = questions.at(currentIndex);
     if (!question) return;
 
     const choice = question.choices.find((c) => c.formula === formula);
     const correct = choice?.correct === true;
+
     setSelectedFormula(formula);
-    setIsCorrect(choice?.correct === true);
-    if (correct) setScore((s) => s + 1);
+    setIsCorrect(correct);
+    if (correct) {
+      setScore((s) => s + 1);
+      setStreak((s) => s + 1);
+    } else {
+      setStreak(0);
+      setWrongCount((w) => w + 1);
+    }
+    setHasAnswered(true);
   }
 
   function nextQuestion() {
@@ -32,16 +42,19 @@ export function useQuestions() {
     setSelectedFormula(null);
     setIsCorrect(null);
   }
+
   return {
     currentIndex,
-    // eslint-disable-next-line security/detect-object-injection
-    currentQuestion: questions[currentIndex] ?? null,
+    currentQuestion: questions.at(currentIndex) ?? null,
     isCorrect,
     nextQuestion,
     selectAnswer,
     selectedFormula,
     totalQuestions: questions.length,
     score,
+    streak,
+    wrongCount,
+    hasAnswered,
   };
 }
 
