@@ -52,7 +52,6 @@ describe("proxy middleware", () => {
   it("builds middleware with the public route matcher", () => {
     expect(middleware).toBe("mock-clerk-middleware");
     expect(createRouteMatcherMock).toHaveBeenCalledWith([
-      "/",
       "/sign-in(.*)",
       "/sign-up(.*)",
       "/api/auth/sync(.*)",
