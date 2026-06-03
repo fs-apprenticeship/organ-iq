@@ -100,7 +100,7 @@ Rules:
   }, [currentQuestion, knownAnswer, extraContext]);
 
   const streamResponse = async (
-    messagesToSend: Array<{ role: MessageRole; content: string }>
+    messagesToSend: Array<{ role: MessageRole; content: string }>,
   ) => {
     let assistantResponse = "";
     let buffer = "";
@@ -137,13 +137,16 @@ Rules:
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ messages: messagesToSend }),
-        }
+        },
       );
     } catch (error) {
       console.error("Chat error:", error);
       setMessages((prev) => [
         ...prev.slice(0, -1),
-        { content: "Sorry, I couldn't connect. Please try again.", role: "assistant" },
+        {
+          content: "Sorry, I couldn't connect. Please try again.",
+          role: "assistant",
+        },
       ]);
     } finally {
       setIsLoading(false);
@@ -232,7 +235,8 @@ Rules:
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full text-center">
             <p className="text-gray-500 text-sm">
-              Stuck on the reaction?<br />
+              Stuck on the reaction?
+              <br />
               Click <strong>Help!</strong>
             </p>
           </div>

@@ -92,14 +92,14 @@ export default function GameClient({ playerName }: { playerName: string }) {
           )}
         </div>
 
-      <AITutor
-        systemPrompt="You are an expert organic chemistry tutor for an educational game. Be clear, encouraging, and accurate."
-        height="520px"
-        currentQuestion={currentQuestion}
-        knownAnswer={
-          currentQuestion?.choices?.find((c) => c.correct)?.formula || null
-        }
-      />
+        <AITutor
+          systemPrompt="You are an expert organic chemistry tutor for an educational game. Be clear, encouraging, and accurate."
+          height="520px"
+          currentQuestion={currentQuestion}
+          knownAnswer={
+            currentQuestion?.choices?.find((c) => c.correct)?.formula || null
+          }
+        />
       </div>
     </div>
   );
