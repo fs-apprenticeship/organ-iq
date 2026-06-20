@@ -5,6 +5,7 @@ import { baseFixture } from "./seed-fixtures/base";
 import { seedAccounts } from "./seed-helpers/accounts";
 import { maybeLoadModule } from "./seed-helpers/maybe-load-module";
 import { type Fixture } from "./seed-helpers/types";
+import { seedUsers } from "./seed-helpers/users"; // ← NEW
 
 const prisma = getClient();
 
@@ -23,6 +24,12 @@ async function seedFromFixture(fixture: Fixture) {
   if (fixture.accounts) {
     await seedAccounts(prisma, fixture.accounts);
   }
+
+  // ==================== NEW ====================
+  if (fixture.users) {
+    await seedUsers(prisma, fixture.users);
+  }
+  // ============================================
 
   if (fixture.afterSeed) {
     await fixture.afterSeed(prisma);
